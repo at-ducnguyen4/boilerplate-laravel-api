@@ -244,6 +244,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - feature/sprint0
             tags:
               ignore:
                 - /.*/

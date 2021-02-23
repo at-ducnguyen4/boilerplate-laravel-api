@@ -17,15 +17,15 @@ WORK_DIR=/var/www/
 BASE_IMAGE_NAME=boilerplate/proxy-php-base
 
 if [[ "$AWS_ENV" == "dev" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-dev-duc-repository"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_DEV}"
     AWS_REGION="us-west-2"
     elif [[ "$AWS_ENV" == "stg" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_STG}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-dev-duc-repository"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_STG}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_STG}"
     AWS_REGION="us-west-2"
     elif [[ "$AWS_ENV" == "prd" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_PRD}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-dev-duc-repository"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_PRD}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_PRD}"
     AWS_REGION="us-west-2"
 fi
