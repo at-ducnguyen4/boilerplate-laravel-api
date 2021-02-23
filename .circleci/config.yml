@@ -208,7 +208,7 @@ jobs:
     steps:
       - checkout
       - <<: *setup_specific_docker
-      - <<: *restore_dependencies_cache
+      - <<: *restore_composer_dependencies_cache
       - run:
           name: Install dependencies
           command: |
@@ -217,7 +217,7 @@ jobs:
               sudo docker-php-ext-install sockets
               composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
             fi
-      - <<: *save_dependencies_cache
+      - <<: *save_composer_dependencies_cache
       - <<: *install_aws_cli
       - when:
           condition: <<parameters.production>>
