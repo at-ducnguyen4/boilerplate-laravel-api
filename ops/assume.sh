@@ -60,7 +60,7 @@ aws_sts_credentials="$(aws sts assume-role \
 aws configure --profile boilerplate-${aws_env} << EOF
 $(echo "$aws_sts_credentials" | jq -r '.AccessKeyId')
 $(echo "$aws_sts_credentials" | jq -r '.SecretAccessKey')
-ap-northeast-1
+us-west-2
 json
 EOF
 
@@ -72,7 +72,7 @@ export AWS_ACCESS_KEY_ID="$(echo "$aws_sts_credentials" | jq -r '.AccessKeyId')"
 export AWS_SECRET_ACCESS_KEY="$(echo "$aws_sts_credentials" | jq -r '.SecretAccessKey')"
 export AWS_SESSION_TOKEN="$(echo "$aws_sts_credentials" | jq -r '.SessionToken')"
 export AWS_ACCOUNT_ID="$aws_account_id"
-export AWS_DEFAULT_REGION="ap-northeast-1"
+export AWS_DEFAULT_REGION="us-west-2"
 export AWS_ENV="$aws_env"
 export AWS_BOILERPLATE_KMS="$aws_boilerplate_kms"
 EOT
