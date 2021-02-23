@@ -46,9 +46,9 @@ push_image() {
 
 build_image(){
     # Build Base image
-    docker build --rm -f environments/Base.Dockerfile --build-arg WORK_DIR="${WORK_DIR}" --build-arg PHP_TAG="${PHP_TAG}"  --build-arg HTTPD_TAG="${HTTPD_TAG}" -t "${BASE_IMAGE_NAME}:${BASE_TAG}" .
+    docker build --rm -f dockers/Base.Dockerfile --build-arg WORK_DIR="${WORK_DIR}" --build-arg PHP_TAG="${PHP_TAG}"  --build-arg HTTPD_TAG="${HTTPD_TAG}" -t "${BASE_IMAGE_NAME}:${BASE_TAG}" .
     # Build App image
-    docker build --rm -f "environments/Dockerfile" --build-arg IMAGE_NAME="${BASE_IMAGE_NAME}" --build-arg PORT=80 --build-arg BASE_TAG="${BASE_TAG}" -t "${BACKEND_IMAGE_NAME}:latest" .
+    docker build --rm -f "dockers/Dockerfile" --build-arg IMAGE_NAME="${BASE_IMAGE_NAME}" --build-arg PORT=80 --build-arg BASE_TAG="${BASE_TAG}" -t "${BACKEND_IMAGE_NAME}:latest" .
 }
 save_image() {
     docker image save -o "$BACKEND_IMAGE_NAME" "${BACKEND_IMAGE_NAME}:latest" &
