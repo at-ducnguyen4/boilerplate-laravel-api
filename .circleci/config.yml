@@ -165,24 +165,24 @@ jobs:
             set -x
             ./vendor/bin/phplint ./ --exclude=vendor
             echo "TODO: Run phplint"
-      - run:
-          name: Test phpmd
-          command: |
-            set -x
-            ./vendor/bin/phpmd app text phpmd.xml
-            echo "TODO: Run phpmd"
-      - run:
-          name: Test phpcs
-          command: |
-            set -x
-            ./vendor/bin/phpcs --standard=phpcs.xml --extensions=php --exclude=Generic.Files.LineLength --ignore=app/Support/helpers.php app
-            echo "TODO: Run phpcs"
-      - run:
-          name: Test npmlint
-          command: |
-            set -x
-            npm run lint
-            echo "TODO: Run npmlint"
+      # - run:
+      #     name: Test phpmd
+      #     command: |
+      #       set -x
+      #       ./vendor/bin/phpmd app text phpmd.xml
+      #       echo "TODO: Run phpmd"
+      # - run:
+      #     name: Test phpcs
+      #     command: |
+      #       set -x
+      #       ./vendor/bin/phpcs --standard=phpcs.xml --extensions=php --exclude=Generic.Files.LineLength --ignore=app/Support/helpers.php app
+      #       echo "TODO: Run phpcs"
+      # - run:
+      #     name: Test npmlint
+      #     command: |
+      #       set -x
+      #       npm run lint
+      #       echo "TODO: Run npmlint"
       - <<: *restore_composer_security_checker
       - <<: *checking_composer_dependencies_security
       - <<: *save_composer_security_checker

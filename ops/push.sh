@@ -17,17 +17,17 @@ WORK_DIR=/var/www/
 BASE_IMAGE_NAME=boilerplate/proxy-php-base
 
 if [[ "$AWS_ENV" == "dev" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.ap-northeast-1.amazonaws.com/${AWS_ENV}-boilerplate-repo-ecs-backend"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_DEV}"
-    AWS_REGION="ap-northeast-1"
+    AWS_REGION="us-west-2"
     elif [[ "$AWS_ENV" == "stg" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_STG}.dkr.ecr.ap-northeast-1.amazonaws.com/${AWS_ENV}-boilerplate-repo-ecs-backend"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_STG}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_STG}"
-    AWS_REGION="ap-northeast-1"
+    AWS_REGION="us-west-2"
     elif [[ "$AWS_ENV" == "prd" ]]; then
-    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_PRD}.dkr.ecr.ap-northeast-1.amazonaws.com/${AWS_ENV}-boilerplate-repo-ecs-backend"
+    BACKEND_ECR_URL="${AWS_ACCOUNT_ID_PRD}.dkr.ecr.us-west-2.amazonaws.com/${AWS_ENV}-duc-repository"
     AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID_PRD}"
-    AWS_REGION="ap-northeast-1"
+    AWS_REGION="us-west-2"
 fi
 
 load_image(){
@@ -46,9 +46,9 @@ push_image() {
 
 build_image(){
     # Build Base image
-    docker build --rm -f environments/Base.Dockerfile --build-arg WORK_DIR="${WORK_DIR}" --build-arg PHP_TAG="${PHP_TAG}"  --build-arg HTTPD_TAG="${HTTPD_TAG}" -t "${BASE_IMAGE_NAME}:${BASE_TAG}" .
+    docker build --rm -f dockers/Base.Dockerfile --build-arg WORK_DIR="${WORK_DIR}" --build-arg PHP_TAG="${PHP_TAG}"  --build-arg HTTPD_TAG="${HTTPD_TAG}" -t "${BASE_IMAGE_NAME}:${BASE_TAG}" .
     # Build App image
-    docker build --rm -f "environments/Dockerfile" --build-arg IMAGE_NAME="${BASE_IMAGE_NAME}" --build-arg PORT=80 --build-arg BASE_TAG="${BASE_TAG}" -t "${BACKEND_IMAGE_NAME}:latest" .
+    docker build --rm -f "dockers/Dockerfile" --build-arg IMAGE_NAME="${BASE_IMAGE_NAME}" --build-arg PORT=80 --build-arg BASE_TAG="${BASE_TAG}" -t "${BACKEND_IMAGE_NAME}:latest" .
 }
 save_image() {
     docker image save -o "$BACKEND_IMAGE_NAME" "${BACKEND_IMAGE_NAME}:latest" &
